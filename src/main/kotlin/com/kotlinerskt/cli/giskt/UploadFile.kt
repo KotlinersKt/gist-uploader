@@ -21,4 +21,5 @@ fun createGisktFile(gistFileName: File): GisktFile {
     return GisktFile(fileName, content)
 }
 
+@Serializable
 data class GisktFile(val name: String, val content: String)
