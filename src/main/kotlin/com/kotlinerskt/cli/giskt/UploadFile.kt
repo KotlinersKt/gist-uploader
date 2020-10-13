@@ -11,8 +11,28 @@ fun GisktFile.uploadFile(isPublic: Boolean) {
     println("Gist to upload $gist")
 
     //TODO networkt call
+}
 
+fun GisktFile.createGistRequest(isPublic: Boolean, description: String): GistRequest {
+    val files: GistFiles = mapOf<String, GistContent>(
+        name to GistContent(content)
+    )
 
+    return GistRequest(
+        public = isPublic,
+        files = files,
+        description = description
+    )
+}
+
+fun List<GisktFile>.createGistRequest(isPublic: Boolean, description: String): GistRequest {
+    val files: GistFiles = map { it.name to GistContent(it.content) }.toMap()
+
+    return GistRequest(
+        public = isPublic,
+        files = files,
+        description = description
+    )
 }
 
 fun createGisktFile(gistFileName: File): GisktFile {
