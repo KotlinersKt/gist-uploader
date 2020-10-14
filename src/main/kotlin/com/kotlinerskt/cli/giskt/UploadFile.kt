@@ -8,13 +8,11 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
 
-fun GisktFile.uploadFile(isPublic: Boolean) {
-    val files = mapOf<String, Map<String, String>>(
-            name to mapOf(
-                    "content" to content))
-    val gist = mapOf<String, Any>("public" to isPublic, "files" to files,
-            "description" to "El mejor gist del mundo")
-    println("Gist to upload $gist")
+fun GistRequest.uploadFile() {
+    println("Gist to upload $this")
+
+    val json = Json.encodeToString(this)
+    println("Json serialization $json")
 
     //TODO networkt call
 }
