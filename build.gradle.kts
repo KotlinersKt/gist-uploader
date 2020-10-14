@@ -8,6 +8,8 @@ plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.4.10"
 
+    kotlin("plugin.serialization") version "1.4.0"
+
     // Apply the application plugin to add support for building a CLI application.
     application
 }
@@ -33,6 +35,9 @@ dependencies {
 
     // Use clikt
     implementation("com.github.ajalt.clikt:clikt:3.0.1")
+
+    // Kotlin serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0")
 }
 
 application {
