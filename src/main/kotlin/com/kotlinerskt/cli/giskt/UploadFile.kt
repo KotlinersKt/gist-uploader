@@ -1,5 +1,11 @@
 package com.kotlinerskt.cli.giskt
 
+import com.kotlinerskt.cli.giskt.github.GistContent
+import com.kotlinerskt.cli.giskt.github.GistFiles
+import com.kotlinerskt.cli.giskt.github.GistRequest
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import java.io.File
 
 fun GisktFile.uploadFile(isPublic: Boolean) {
