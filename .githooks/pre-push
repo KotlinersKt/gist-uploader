@@ -1,0 +1,12 @@
+#!/bin/sh
+echo "Running ktlint"
+./gradlew ktlintCheck
+if [ $? -ne 0 ]; then
+  echo 'Running ktlintFormat'
+  ./gradlew ktlintFormat
+  if [ $? -ne 1 ]; then
+    git add .
+    git commit -m 'Fixing lint'
+  fi
+  exit 1;
+fi
