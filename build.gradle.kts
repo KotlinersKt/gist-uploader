@@ -7,7 +7,7 @@
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.4.10"
-
+    id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
     // Apply the application plugin to add support for building a CLI application.
     application
 }
@@ -15,6 +15,7 @@ plugins {
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
+    mavenCentral()
     jcenter()
 }
 
