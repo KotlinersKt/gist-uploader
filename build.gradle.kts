@@ -38,6 +38,16 @@ dependencies {
 
     // Kotlin serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0")
+
+    // Ktor-client
+    implementation("io.ktor:ktor-client-core:1.4.1")
+    implementation("io.ktor:ktor-client-cio:1.4.1")
+    implementation("io.ktor:ktor-client-json:1.4.1")
+    implementation("io.ktor:ktor-client-serialization:1.4.1")
+    implementation("io.ktor:ktor-client-logging:1.4.1")
+
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.10")
+
 }
 
 application {
