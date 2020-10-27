@@ -10,8 +10,6 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.util.*
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 data class GithubCredentials(val rawToken: String) {
     val bearerToken: String
@@ -22,14 +20,20 @@ data class GithubCredentials(val rawToken: String) {
 class GithubClient(private val credentials: GithubCredentials) {
 
     private val client = HttpClient(CIO) {
-        install(JsonFeature) {
+        Json {
+            serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
+                isLenient = false
+                ignoreUnknownKeys = false
+                allowSpecialFloatingPointValues = true
+                useArrayPolymorphism = false
+                prettyPrint = true
+            })
             acceptContentTypes = listOf(
                     ContentType.parse("application/vnd.any+json"),
                     ContentType.parse("application/json"),
             )
-            serializer = KotlinxSerializer()
         }
-        install(Logging) {
+        Logging {
             logger = Logger.DEFAULT
             level = LogLevel.ALL
         }
@@ -40,9 +44,10 @@ class GithubClient(private val credentials: GithubCredentials) {
             client.post(baseUrl) {
                 headers {
                     append("Accept", "application/vnd.github.v3+json")
+                    append("Content-Type", "application/json")
                     append("Authorization", credentials.bearerToken)
                 }
-                body = Json.encodeToString(gisktRequest)
+                body = gisktRequest
             }
         } catch (e: Exception) {
             e.printStackTrace()

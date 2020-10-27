@@ -8,7 +8,6 @@ plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.4.10"
     id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
-
     kotlin("plugin.serialization") version "1.4.0"
 
     // Apply the application plugin to add support for building a CLI application.
@@ -38,18 +37,12 @@ dependencies {
     // Use clikt
     implementation("com.github.ajalt.clikt:clikt:3.0.1")
 
-    // Kotlin serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0")
-
     // Ktor-client
     implementation("io.ktor:ktor-client-core:1.4.1")
     implementation("io.ktor:ktor-client-cio:1.4.1")
     implementation("io.ktor:ktor-client-json:1.4.1")
     implementation("io.ktor:ktor-client-serialization:1.4.1")
     implementation("io.ktor:ktor-client-logging:1.4.1")
-
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.10")
-
 }
 
 application {

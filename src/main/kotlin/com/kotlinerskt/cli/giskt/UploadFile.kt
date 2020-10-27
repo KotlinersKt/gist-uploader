@@ -5,9 +5,9 @@ import com.kotlinerskt.cli.giskt.github.GistFiles
 import com.kotlinerskt.cli.giskt.github.GistRequest
 import com.kotlinerskt.cli.giskt.network.GithubClient
 import io.ktor.util.*
+import java.io.File
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
-import java.io.File
 
 @KtorExperimentalAPI
 fun GistRequest.uploadFile() {
