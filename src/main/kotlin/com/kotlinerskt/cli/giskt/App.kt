@@ -3,6 +3,14 @@
  */
 package com.kotlinerskt.cli.giskt
 
+import com.github.ajalt.clikt.core.subcommands
+import com.kotlinerskt.cli.giskt.commands.Giskt
+import com.kotlinerskt.cli.giskt.commands.GisktCreate
+import com.kotlinerskt.cli.giskt.commands.GisktList
+
 fun main(args: Array<String>) {
-    Giskt().main(args)
+    Giskt().subcommands(
+            GisktCreate(),
+            GisktList(),
+    ).main(args)
 }
