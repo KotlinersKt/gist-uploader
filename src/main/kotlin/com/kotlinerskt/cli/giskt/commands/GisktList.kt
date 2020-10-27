@@ -13,7 +13,7 @@ class GisktList : CliktCommand(name = "list") {
         runBlocking {
             val githubClient = GithubClient(SecretToken.TOKEN)
             echo(
-                    githubClient.listGiskts()?.readText()
+                githubClient.listGiskts()?.readText()
             )
         }
     }

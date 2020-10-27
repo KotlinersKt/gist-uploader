@@ -1,9 +1,11 @@
 #!/bin/sh
-echo "Running ktlint"
-./gradlew ktlintCheck
+echo "Running kotlinter"
+echo "Checking code..."
+./gradlew lintKotlin
 if [ $? -ne 0 ]; then
-  echo 'Running ktlintFormat'
-  ./gradlew ktlintFormat
+  echo 'Running kotlinter'
+  echo 'Formatting code...'
+  ./gradlew formatKotlin
   if [ $? -ne 1 ]; then
     git add .
     git commit -m 'Fixing lint'
