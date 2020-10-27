@@ -7,7 +7,7 @@
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.4.10"
-    id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
+    id("org.jmailen.kotlinter") version "3.2.0"
     kotlin("plugin.serialization") version "1.4.0"
 
     // Apply the application plugin to add support for building a CLI application.
@@ -48,4 +48,8 @@ dependencies {
 application {
     // Define the main class for the application.
     mainClassName = "com.kotlinerskt.cli.giskt.AppKt"
+}
+
+kotlinter {
+    disabledRules = arrayOf("no-wildcard-imports", "filename")
 }
