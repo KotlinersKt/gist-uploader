@@ -21,16 +21,18 @@ class GithubClient(private val credentials: GithubCredentials) {
 
     private val client = HttpClient(CIO) {
         Json {
-            serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
-                isLenient = false
-                ignoreUnknownKeys = false
-                allowSpecialFloatingPointValues = true
-                useArrayPolymorphism = false
-                prettyPrint = true
-            })
+            serializer = KotlinxSerializer(
+                kotlinx.serialization.json.Json {
+                    isLenient = false
+                    ignoreUnknownKeys = false
+                    allowSpecialFloatingPointValues = true
+                    useArrayPolymorphism = false
+                    prettyPrint = true
+                }
+            )
             acceptContentTypes = listOf(
-                    ContentType.parse("application/vnd.any+json"),
-                    ContentType.parse("application/json"),
+                ContentType.parse("application/vnd.any+json"),
+                ContentType.parse("application/json"),
             )
         }
         Logging {
@@ -72,9 +74,7 @@ class GithubClient(private val credentials: GithubCredentials) {
     companion object {
         const val baseUrl = "https://api.github.com/gists"
         operator fun invoke(token: String) = GithubClient(
-                GithubCredentials(token)
+            GithubCredentials(token)
         )
-
     }
-
 }

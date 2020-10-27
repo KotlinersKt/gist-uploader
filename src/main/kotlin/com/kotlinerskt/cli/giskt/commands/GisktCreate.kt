@@ -16,18 +16,18 @@ class GisktCreate : CliktCommand(name = "create") {
     private val gistFileName: File by argument(help = "Nombre del archivo gist a subir").file(mustExist = true)
 
     private val isPublic by option(
-            names = arrayOf("-p", "--public"),
-            help = "Necesitas guardar las nudes? aqui no es, solo dejalo privado y pon false"
+        names = arrayOf("-p", "--public"),
+        help = "Necesitas guardar las nudes? aqui no es, solo dejalo privado y pon false"
     ).flag(default = true)
 
     private val description: String by option(
-            names = arrayOf("-d", "--description"),
-            help = "No es que necesitemos de tu ayuda, ni la demás gente, es más no pongas descripción"
+        names = arrayOf("-d", "--description"),
+        help = "No es que necesitemos de tu ayuda, ni la demás gente, es más no pongas descripción"
     ).default("El mejor gist del mundo")
 
     override fun run() {
         createGisktFile(gistFileName)
-                .createGistRequest(isPublic, description)
-                .uploadFile()
+            .createGistRequest(isPublic, description)
+            .uploadFile()
     }
 }

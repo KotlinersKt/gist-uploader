@@ -10,7 +10,7 @@ import com.kotlinerskt.cli.giskt.commands.GisktList
 
 fun main(args: Array<String>) {
     Giskt().subcommands(
-            GisktCreate(),
-            GisktList(),
+        GisktCreate(),
+        GisktList(),
     ).main(args)
 }
