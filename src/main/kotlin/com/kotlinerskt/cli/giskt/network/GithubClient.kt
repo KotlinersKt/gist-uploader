@@ -63,7 +63,7 @@ class GithubClient(private val credentials: GithubCredentials) {
     }
 
     suspend fun deleteGistkt(gistId: GistId): HttpResponse? = client.safeRequest {
-        delete("$baseUrl/$gistId") {
+        delete("$baseUrl/${gistId.id}") {
             headers {
                 append("Authorization", credentials.bearerToken)
             }
