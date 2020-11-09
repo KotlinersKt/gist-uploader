@@ -14,4 +14,4 @@ data class GistRequest(
 @Serializable
 data class GistContent(val content: String)
 
-inline class GistId(val id: Int)
+inline class GistId(val id: String)
