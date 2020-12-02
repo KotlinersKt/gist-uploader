@@ -1,5 +1,6 @@
 package com.kotlinerskt.cli.giskt.network
 
+import com.kotlinerskt.cli.giskt.github.GistId
 import com.kotlinerskt.cli.giskt.github.GistRequest
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
@@ -41,30 +42,37 @@ class GithubClient(private val credentials: GithubCredentials) {
         }
     }
 
-    suspend fun createGiskt(gisktRequest: GistRequest): HttpResponse? {
-        return try {
-            client.post(baseUrl) {
-                headers {
-                    append("Accept", "application/vnd.github.v3+json")
-                    append("Content-Type", "application/json")
-                    append("Authorization", credentials.bearerToken)
-                }
-                body = gisktRequest
+    suspend fun createGiskt(gisktRequest: GistRequest): HttpResponse? = client.safeRequest {
+        post(baseUrl) {
+            headers {
+                append("Accept", "application/vnd.github.v3+json")
+                append("Content-Type", "application/json")
+                append("Authorization", credentials.bearerToken)
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            null
+            body = gisktRequest
         }
     }
 
-    suspend fun listGiskts(): HttpResponse? {
-        return try {
-            client.get(baseUrl) {
-                headers {
-                    append("Accept", "application/vnd.github.v3+json")
-                    append("Authorization", credentials.bearerToken)
-                }
+    suspend fun listGiskts(): HttpResponse? = client.safeRequest {
+        get(baseUrl) {
+            headers {
+                append("Accept", "application/vnd.github.v3+json")
+                append("Authorization", credentials.bearerToken)
             }
+        }
+    }
+
+    suspend fun deleteGistkt(gistId: GistId): HttpResponse? = client.safeRequest {
+        delete("$baseUrl/${gistId.id}") {
+            headers {
+                append("Authorization", credentials.bearerToken)
+            }
+        }
+    }
+
+    private suspend fun HttpClient.safeRequest(request: suspend HttpClient.() -> HttpResponse): HttpResponse? {
+        return try {
+            request()
         } catch (e: Exception) {
             e.printStackTrace()
             null
